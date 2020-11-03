@@ -1,0 +1,44 @@
+---
+- name: Installing and Launch Filebeat
+  hosts: webservers
+  become: yes
+  tasks:
+
+  - name: Download filebeat .deb file
+    command: curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.6.1-amd64.deb
+
+  - name: Install filebeat .deb
+    command: dpkg -i filebeat-7.6.1-amd64.deb
+
+  - name: Move to filebeat.yml
+    copy:
+      src: /etc/ansible/roles/filebeat-playbook.yml
+      dest: /etc/filebeat/filebeat.yml
+
+  - name: Enable and Configure system module
+    command: filebeat modules enable system
+
+  - name: Setup filebeat system
+    command: filebeat setup
+
+  - name: Start filebeat service
+    command: service filebeat start
+
+  - name: Download the Metricbeat .deb file
+    command: curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.6.1-amd64.deb
+
+  - name: Install metricbeat .deb
+    command: dpkg -i metricbeat-7.6.1-amd64.deb
+
+  - name: Enable and Configure system module
+    command: metricbeat modules enable docker
+
+  - name: Start the metricbeat service
+    command: service metricbeat start
+
+  - name: Config Systcl Memory
+        sysctl:
+          name: vm.max_map_count
+          state: present
+          value: '262144'
+          reload: yes
