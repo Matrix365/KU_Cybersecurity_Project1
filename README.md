@@ -5,7 +5,7 @@ The files in this repository were used to configure the network depicted below.
 
 **Note**: The following image link needs to be updated. Replace `diagram_filename.png` with the name of your diagram image file.  
 
-![KU Project 1 Network Diagram Full](13-Elk-Stack-Project/Images/diagram_filename.png)
+![KU Project 1 Network Diagram Full.pdf](13-Elk-Stack-Project/Images/diagram_filename.png)
 
 13-Elk-Stack-Project/Images/Project_1_Network_Diagram
 
